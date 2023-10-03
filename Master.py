@@ -4,9 +4,13 @@ from tkinter import messagebox
 import hashlib
 from tkinter import ttk
 import pyperclip
+import serial
+
+# Define the serial port and baud rate for communication with Arduino
+ser = serial.Serial('COM3', 9600)  # Use your actual COM port number
 
 root = tk.Tk()
-root.geometry("450x350")
+root.geometry("450x400")
 root.title("Master GUI")
 root.iconbitmap("./task4_logo.ico")
 
@@ -92,7 +96,7 @@ gate_option_menu = ttk.OptionMenu(root, gate_var, "Gate 1", "Gate 2")
 
 generate_button = ttk.Button(
     root, text="Generate Token", command=generateCode)
-generated_token = ttk.Label(root, text="****************")
+generated_token = ttk.Label(root, text="")
 
 
 def copyCode():
@@ -104,7 +108,22 @@ def copyCode():
         messagebox.showerror("Error", "No code to copy.")
 
 
+def sendToArduino():
+    generated_code = generated_token.cget("text")
+    if generated_code:
+        try:
+            ser.write(generated_code.encode())  # Send the code to Arduino
+            messagebox.showinfo("Info", "Code sent to Arduino successfully!")
+        except Exception as e:
+            messagebox.showerror(
+                "Error", f"Error sending code to Arduino: {e}")
+    else:
+        messagebox.showerror("Error", "No code to send.")
+
+
 copy_button = ttk.Button(root, text="Copy Code", command=copyCode)
+send_to_arduino_button = ttk.Button(
+    root, text="Save to Arduino", command=sendToArduino)
 
 nic_label.pack(padx=10, pady=(10, 0))
 nic_input.pack(padx=10, pady=(5, 12))
@@ -115,5 +134,6 @@ gate_option_menu.pack(padx=10, pady=(5, 12))
 generate_button.pack(padx=10, pady=(10, 0))
 generated_token.pack(padx=10, pady=(5, 12))
 copy_button.pack(padx=10, pady=(5, 12))
+send_to_arduino_button.pack(padx=10, pady=(5, 12))
 
 root.mainloop()
