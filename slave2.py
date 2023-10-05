@@ -23,7 +23,7 @@ def checkCode():
 
 # Create GUI elements for Slave 1 (code entry and check button)
 code_label2 = ttk.Label(root2, text="Enter Code:")
-code_entry = ttk.Entry(root2)
+code_entry = ttk.Entry(root2, width=40)
 check_button1 = ttk.Button(root2, text="Check Code", command=checkCode)
 
 # Pack GUI elements
