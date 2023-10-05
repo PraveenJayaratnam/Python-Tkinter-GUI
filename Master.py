@@ -6,8 +6,8 @@ from tkinter import ttk
 import pyperclip
 import serial
 
-# Define the serial port and baud rate for communication with Arduino
-ser = serial.Serial('COM3', 9600)  # Use your actual COM port number
+# Define the serial port and baud rate
+ser = serial.Serial('COM3', 9600)
 
 root = tk.Tk()
 root.geometry("370x300")
@@ -26,7 +26,7 @@ font_style = ("Helvetica", 10, "italic")
 style = ttk.Style(root)
 style.theme_use("vista")
 
-# Function to create a label with white text on a window background
+# create a label with white text on a window background
 
 
 def create_label_with_style(parent, text, font, row, column, columnspan, padx=10, pady=10):
@@ -38,14 +38,13 @@ def create_label_with_style(parent, text, font, row, column, columnspan, padx=10
 
 # Create a style with white text on a window background
 style.configure("White.TLabel", background=root.cget("bg"), foreground="white")
+
 # Create a style for buttons with white text on a window background
 style.configure("White.TButton", background=root.cget(
     "bg"), foreground="#36454F")
 
 
 # Function to generate a secure hash
-
-
 def generateSecureHash(data):
     sha256 = hashlib.sha256()
     sha256.update(data.encode())
@@ -155,6 +154,7 @@ def sendToArduino():
 
 copy_button = ttk.Button(root, text="Copy Code",
                          command=copyCode, style="White.TButton")
+
 send_to_arduino_button = ttk.Button(
     root, text="Save to Database", command=sendToArduino, style="White.TButton")
 
