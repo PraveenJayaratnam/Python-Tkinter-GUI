@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import serial
 
-ser1 = serial.Serial('COM4', 9600)
+ser2 = serial.Serial('COM4', 9600)
 
 
 root2 = tk.Tk()
@@ -44,7 +44,7 @@ style.configure("White.TButton", background=root2.cget(
 
 def checkCode():
     entered_code = code_entry.get()
-    ser1.write(entered_code.encode())
+    ser2.write(entered_code.encode())
 
 
 # Create GUI elements for Slave 1
