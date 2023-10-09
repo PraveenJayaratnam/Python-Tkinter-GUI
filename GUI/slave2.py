@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import serial
 
-slave_ser2 = serial.Serial('COM4', 115200)
+slave_ser2 = serial.Serial('COM4', 9600)
 
 
 def send_to_arduino_slave(input_str, ser):
@@ -39,7 +39,7 @@ def submit_token():
 
 root2 = tk.Tk()
 root2.geometry("265x200")
-root2.title("Slave1 GUI")
+root2.title("Slave2 GUI")
 root2.configure(bg="#000036")
 
 head_font = ("Helvetica", 24, "bold")

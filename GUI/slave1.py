@@ -4,7 +4,7 @@ from tkinter import ttk
 import serial
 
 
-slave_ser1 = serial.Serial('COM4', 115200)
+slave_ser1 = serial.Serial('COM4', 9600)
 
 
 def send_to_arduino_slave(input_str, ser):
